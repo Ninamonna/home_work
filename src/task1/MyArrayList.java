@@ -5,11 +5,11 @@ package task1;
  */
 public class MyArrayList<T> {
 
-    private Object[] array; // массив типа <T>
+    private Object[] array;
     private int size; // размер MyArrayList
 
     /* конструктор создает MyArrayList по умолчанию будет
-     * создан массив из 10-ти элементов типа <T>
+     * создан массив из 10-ти элементов типа Object
      * размером 0.
      */
     public MyArrayList() {
