@@ -1,16 +1,17 @@
 package task1;
+
 /* Класс QuickSort предоставляет статический метод для выполнения
-  алгоритма quickSort используя MyArrayList.
-  Алгоритм сортирует элементы в порядке возрастания.
-*/
+ * алгоритма quickSort используя MyArrayList.
+ * Алгоритм сортирует элементы в порядке возрастания.
+ */
 public class QuickSort {
 
-    // Сортирует элементы в MyArrayList в порядке возрастания, используя quickSortAlgorithm.
-    public  <T extends Comparable<T>> void quickSort(MyArrayList<T> array) {
+    /* Сортирует элементы в MyArrayList в порядке возрастания, используя quickSortAlgorithm.*/
+    public <T extends Comparable<T>> void quickSort(MyArrayList<T> array) {
         quickSortAlgorithm(array, 0, array.size() - 1);
     }
 
-    // Рекурсивно разделяет MyArrayList и сортирует его элементы между левым и правым индексами.
+    /* Рекурсивно разделяет MyArrayList и сортирует его элементы между левым и правым индексами.*/
     private <T extends Comparable<T>> void quickSortAlgorithm(MyArrayList<T> array, int left, int right) {
         if (left < right) {
             int pivotIndex = partition(array, left, right); // находим опорный элемент
@@ -18,19 +19,23 @@ public class QuickSort {
             quickSortAlgorithm(array, pivotIndex + 1, right);
         }
     }
-    // разделяем массив на две части относительно опорного элемента
+
+    /* разделяем массив на две части относительно опорного элемента
+     * проходим циклом от левой до правой границы массива. Если элемент,
+     * находящейся на текущей позиции, меньше опорного элемента
+     * то меняем его местами с элементом на позиции i и увеличиваем переменную i на 1.
+     */
     private <T extends Comparable<T>> int partition(MyArrayList<T> array, int left, int right) {
         T pivotValue = array.get(right); // опорный элемент со значением элемента массива справа
         int i = left; // позиция опорного элемента до сортировки
-        //цикл от левой до правой границы массива.
+
         for (int j = left; j < right; j++) {
-            //Если элемент, находящейся на текущей позиции, меньше опорного элемента
             if (array.get(j).compareTo(pivotValue) < 0) {
-                swap(array, i, j);  // то меняем его местами с элементом на позиции i
-                i++; //увеличиваем переменную i на 1.
+                swap(array, i, j);
+                i++;
             }
         }
-        swap(array, i, right); //меняем местами элемент на позиции i с опорным элементом
+        swap(array, i, right);
         return i; // позиция опорного элемента после сортировки
     }
 

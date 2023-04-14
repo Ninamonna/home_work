@@ -27,13 +27,11 @@ public class QuickSortTest {
         array.add(7);
         array.add(3);
         array.add(5);
-
         // when
         quickSort.quickSort(array);
-
         // then
         for (int i = 0; i < array.size() - 1; i++) {
-            Assertions.assertTrue(array.get(i) <= array.get(i+1));
+            Assertions.assertTrue(array.get(i) <= array.get(i + 1));
         }
     }
 
@@ -51,13 +49,11 @@ public class QuickSortTest {
         array.add(3);
         array.add(5);
         array.add(4);
-
         // when
         quickSort.quickSort(array);
-
         // then
         for (int i = 0; i < array.size() - 1; i++) {
-            Assertions.assertTrue(array.get(i) <= array.get(i+1));
+            Assertions.assertTrue(array.get(i) <= array.get(i + 1));
         }
     }
 
@@ -65,10 +61,8 @@ public class QuickSortTest {
     public void testQuickSortWithEmptyArray() {
         // given
         MyArrayList<Integer> array = new MyArrayList<>();
-
         // when
         quickSort.quickSort(array);
-
         // then
         Assertions.assertEquals(0, array.size());
     }
