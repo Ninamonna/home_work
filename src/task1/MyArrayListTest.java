@@ -3,8 +3,7 @@ package task1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MyArrayListTest {
 
@@ -18,6 +17,7 @@ public class MyArrayListTest {
         // then
         assertEquals(2, list.size());
     }
+
 
     @Test
     void testAdd() {
@@ -166,6 +166,19 @@ public class MyArrayListTest {
         int elementIndex = list.indexOf(elementToFind);
         // then
         Assertions.assertEquals(-1, elementIndex);
+    }
+    @Test
+    public void testNull() {
+        MyArrayList<String> list = new MyArrayList<>();
+        list.add("one");
+        list.add(null);
+        list.add("three");
+        list.add("four");
+
+        assertNull(list.get(1));
+        assertEquals(1, list.indexOf(null));
+        assertEquals("four", list.removeByIndex(3));
+        assertTrue(list.removeByElement(null));
     }
 }
 

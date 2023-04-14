@@ -5,7 +5,7 @@ package task1;
  */
 public class MyArrayList<T> {
 
-    private T[] array; // массив типа <T>
+    private Object[] array; // массив типа <T>
     private int size; // размер MyArrayList
 
     /* конструктор создает MyArrayList по умолчанию будет
@@ -14,7 +14,7 @@ public class MyArrayList<T> {
      */
     public MyArrayList() {
 
-        this.array = (T[]) new Object[10];
+        this.array = new Object[10];
         this.size = 0;
     }
 
@@ -28,7 +28,7 @@ public class MyArrayList<T> {
      */
     public void add(T item) {
         if (size == array.length) {
-            T[] newArray = (T[]) new Object[(array.length * 3) / 2 + 1];
+            Object[] newArray = new Object[(array.length * 3) / 2 + 1];
             System.arraycopy(array, 0, newArray, 0, array.length);
             array = newArray;
         }
@@ -43,7 +43,7 @@ public class MyArrayList<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        return array[index];
+        return (T)array[index];
     }
 
     /* устанавливает элемент на определенную позицию */
@@ -69,7 +69,7 @@ public class MyArrayList<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        T removedElement = array[index];
+        T removedElement = (T) array[index];
         if (size - (index + 1) >= 0)
             System.arraycopy(array, index + 1, array, index + 1 - 1, size - (index + 1));
             size--;
@@ -79,7 +79,9 @@ public class MyArrayList<T> {
     /* возвращает индекс указанного элемента */
     public int indexOf(T element) {
         for (int i = 0; i < size; i++) {
-            if (array[i].equals(element)) {
+            if(array[i]==null && element == null) {
+                return i;
+            } else if (element != null && element.equals(array[i])) {
                 return i;
             }
         }
