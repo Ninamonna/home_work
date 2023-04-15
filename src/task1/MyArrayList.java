@@ -1,44 +1,51 @@
 package task1;
+
 /* Простая реализация структуры данных ArrayList
- использующая массив с типом <T> для хранения элементов.*/
+ * использующая массив с типом <T> для хранения элементов.
+ */
 public class MyArrayList<T> {
 
-    private T[] array; // массив типа <T>
+    private Object[] array;
     private int size; // размер MyArrayList
 
     /* конструктор создает MyArrayList по умолчанию будет
-    создан массив из 10-ти элементов типа <T>
-    размером 0.
-    */
+     * создан массив из 10-ти элементов типа Object
+     * размером 0.
+     */
     public MyArrayList() {
 
-        this.array = (T[]) new Object[10];
+        this.array = new Object[10];
         this.size = 0;
     }
+
     /* возвращает размер MyArrayList */
     public int size() {
         return size;
     }
+
     /* добавляет элемент в конец MyArrayList, когда массив заполняется
-    *  происходит перезапись массива с новой длинной по формуле (length * 3)/ 2 + 1
-    */
+     *  происходит перезапись массива с новой длинной по формуле (length * 3)/ 2 + 1
+     */
     public void add(T item) {
         if (size == array.length) {
-            T[] newArray = (T[]) new Object[(this.array.length * 3)/ 2 + 1];
+            Object[] newArray = new Object[(array.length * 3) / 2 + 1];
             System.arraycopy(array, 0, newArray, 0, array.length);
             array = newArray;
         }
 
         array[size++] = item;
     }
+
     /* возвращает элемент по указанному индексу, если индекс выходит за пределы допустимого диапазона
-    * выбрасывает IndexOutOfBoundsException */
+     * выбрасывает IndexOutOfBoundsException
+     */
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        return array[index];
+        return (T)array[index];
     }
+
     /* устанавливает элемент на определенную позицию */
     public void set(int index, T item) {
         if (index < 0 || index >= size) {
@@ -46,6 +53,7 @@ public class MyArrayList<T> {
         }
         array[index] = item;
     }
+
     /* удаляет определенный элемент */
     public boolean removeByElement(T element) {
         int index = indexOf(element);
@@ -55,22 +63,25 @@ public class MyArrayList<T> {
         }
         return false;
     }
+
     /* удаляет элемент по указанному индексу */
     public T removeByIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        T removedElement = array[index];
-        for (int i = index + 1; i < size; i++) {
-            array[i - 1] = array[i];
-        }
-        size--;
+        T removedElement = (T) array[index];
+        if (size - (index + 1) >= 0)
+            System.arraycopy(array, index + 1, array, index + 1 - 1, size - (index + 1));
+            size--;
         return removedElement;
     }
+
     /* возвращает индекс указанного элемента */
     public int indexOf(T element) {
         for (int i = 0; i < size; i++) {
-            if (array[i].equals(element)) {
+            if(array[i]==null && element == null) {
+                return i;
+            } else if (element != null && element.equals(array[i])) {
                 return i;
             }
         }

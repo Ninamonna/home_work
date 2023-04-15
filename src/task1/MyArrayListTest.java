@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MyArrayListTest {
 
-
     @Test
     void testSize() {
         // given
@@ -18,6 +17,7 @@ public class MyArrayListTest {
         // then
         assertEquals(2, list.size());
     }
+
 
     @Test
     void testAdd() {
@@ -78,6 +78,7 @@ public class MyArrayListTest {
         list.add(2);
         assertThrows(IndexOutOfBoundsException.class, () -> list.set(2, 3));
     }
+
     @Test
     public void testRemoveByElement() {
         // given
@@ -85,10 +86,8 @@ public class MyArrayListTest {
         list.add(1.0);
         list.add(2.0);
         list.add(3.0);
-
         // when
         boolean removed = list.removeByElement(1.0);
-
         // then
         Assertions.assertTrue(removed);
         Assertions.assertEquals(2, list.size());
@@ -104,11 +103,8 @@ public class MyArrayListTest {
         list.add('2');
         list.add('3');
         char elementToRemove = '4';
-
-
         // when
         boolean removed = list.removeByElement(elementToRemove);
-
         // then
         Assertions.assertFalse(removed);
         Assertions.assertEquals(3, list.size());
@@ -122,10 +118,8 @@ public class MyArrayListTest {
         list.add(2);
         list.add(3);
         int elementIndexToRemove = 1;
-
         // when
         int removedElement = list.removeByIndex(elementIndexToRemove);
-
         // then
         Assertions.assertEquals(2, removedElement);
         Assertions.assertEquals(2, list.size());
@@ -141,7 +135,6 @@ public class MyArrayListTest {
         list.add("feel");
         list.add("doc");
         int elementIndexToRemove = 3;
-
         // when & then
         Assertions.assertThrows(IndexOutOfBoundsException.class, () ->
                 list.removeByIndex(elementIndexToRemove));
@@ -155,10 +148,8 @@ public class MyArrayListTest {
         list.add(42);
         list.add(31);
         int elementToFind = 31;
-
         // when
         int elementIndex = list.indexOf(elementToFind);
-
         // then
         Assertions.assertEquals(2, elementIndex);
     }
@@ -171,12 +162,23 @@ public class MyArrayListTest {
         list.add("No");
         list.add("Ok");
         String elementToFind = "Hello";
-
         // when
         int elementIndex = list.indexOf(elementToFind);
-
         // then
         Assertions.assertEquals(-1, elementIndex);
+    }
+    @Test
+    public void testNull() {
+        MyArrayList<String> list = new MyArrayList<>();
+        list.add("one");
+        list.add(null);
+        list.add("three");
+        list.add("four");
+
+        assertNull(list.get(1));
+        assertEquals(1, list.indexOf(null));
+        assertEquals("four", list.removeByIndex(3));
+        assertTrue(list.removeByElement(null));
     }
 }
 
